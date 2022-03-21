@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-VMWARE_VERSION="workstation-$(vmware -v|grep -oE "[[:digit:]]+.[[:digit:]]+.[[:digit:]]+"| head -n1)" # this is detect the version you have VMware Workstation 16.2.1 build-18811642
+VMWARE_VERSION="workstation-$(vmware -v||vmplayer -v|grep -oE "[[:digit:]]+.[[:digit:]]+.[[:digit:]]+"| head -n1)" # this is detect the version you have VMware Workstation 16.2.1 build-18811642
 
 TMP_FOLDER=/tmp/patch-vmware
 rm -fdr $TMP_FOLDER
 mkdir -p $TMP_FOLDER
 cd $TMP_FOLDER || exit
 git clone https://github.com/mkubecek/vmware-host-modules.git
-cd $TMP_FOLDER/vmware-host-modules
+cd $TMP_FOLDER/vmware-host-modules || exit
 git checkout "$VMWARE_VERSION"
 git fetch
 make
