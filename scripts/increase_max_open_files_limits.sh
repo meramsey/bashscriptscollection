@@ -23,6 +23,7 @@ EOL
 echo "Raising System-Wide Limit open files /etc/sysctl.conf"
 cat >> /etc/sysctl.conf <<EOL
 fs.file-max = 2097152
+fs.inotify.max_user_watches=524288
 EOL
 sysctl -p
 
