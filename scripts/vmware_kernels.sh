@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
 
-VMWARE_VERSION="workstation-$(vmware -v||vmplayer -v|grep -oE "[[:digit:]]+.[[:digit:]]+.[[:digit:]]+"| head -n1)" # this is detect the version you have VMware Workstation 16.2.1 build-18811642
+VMWARE_VERSION="player-$(vmware -v||vmplayer -v|grep -oE "[[:digit:]]+.[[:digit:]]+.[[:digit:]]+"| head -n1)" # this is detect the version you have VMware Workstation 16.2.1 build-18811642
 
 TMP_FOLDER=/tmp/patch-vmware
 rm -fdr $TMP_FOLDER
